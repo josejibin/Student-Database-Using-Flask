@@ -1,0 +1,56 @@
+
+<!-- Search page using twitter bootstrap-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A Simple Student Database">
+    <meta name="author" content="Jacob Jose">
+    <title>Student-Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename="bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='blog.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename="bootstrap/css/bootstrap-theme.min.css") }}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+    
+      <h1><style text-align: center;></style>STUDENT DATABASE</h1>
+      <nav class="navbar navbar-default" data-spy="affix" data-offset-top="60" data-offset-bottom="70" id="navbar">
+        
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('home') }}">HOME</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="{{ url_for('add') }}">ADD</a></li>
+              <li><a href="{{ url_for('view') }}">VIEW</a></li>
+              <li><a href="{{ url_for('search') }}">SEARCH</a></li>
+              <li><a href="{{ url_for('delete') }}">DELETE</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" action="{{ url_for('home') }}" method=post >
+             {% if not session.logged_in %}
+              <button type="submit" class="btn btn-default" name="opt"  value="LOGIN">LOGIN</button>
+              {% else %}
+              <button type="submit" class="btn btn-default" name="opt"  value="LOGOUT">LOG OUT</button>
+              {% endif %}
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </nav><!-- /.container-fluid -->
+      
+      <br>
+      <br>
+      <form class="form-inline" action="{{ url_for('search') }}" method=post>
+        <div class="form-group">
+       	   <label class="sr-only" for="inputname">Name</label>
+           <input type="text" class="form-control" id="inputName" placeholder="Name" name="s_name">
+    	</div>
+        <button type="submit" class="btn btn-primary" name="search" value="SEARCH">Search</button>
+	  </form>
+	<script src="{{ url_for('static', filename="jquery-1.11.1") }}"></script>
+    <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}""></script>
+	</body>
+</html>

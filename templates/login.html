@@ -1,0 +1,101 @@
+
+<!-- Login page using twitter bootstrap-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A Simple Student Database">
+    <meta name="author" content="Jacob Jose">
+    <title>Student-Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename="bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='blog.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename="bootstrap/css/bootstrap-theme.min.css") }}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+    
+      <h1><style text-align: center;></style>STUDENT DATABASE</h1>
+      <nav class="navbar navbar-default" data-spy="affix" data-offset-top="60" data-offset-bottom="70" id="navbar">
+        
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('home') }}">HOME</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="{{ url_for('add') }}">ADD</a></li>
+              <li><a href="{{ url_for('view') }}">VIEW</a></li>
+              <li><a href="{{ url_for('search') }}">SEARCH</a></li>
+              <li><a href="{{ url_for('delete') }}">DELETE</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" >
+              {% if not session.logged_in %}
+              <button type="submit" class="btn btn-default" name="opt"  value="LOGIN">LOGIN</button>
+              {% else %}
+              <button type="submit" class="btn btn-default" name="opt"  value="LOGOUT">LOG OUT</button>
+              {% endif %}
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </nav><!-- /.container-fluid -->
+      
+      <br>
+      <br>
+  
+<form action="{{ url_for('login') }}" method=post class="form-horizontal">
+  
+  
+    <div class="form-group">
+        <label for="inputUsername" class="control-label col-xs-2">Username</label>
+        <div class="col-xs-10">
+            <input type="test" class="form-control" id="inputUsername" placeholder="Username" name="username">
+            {% if error=="username" %}
+            <div class="control-group error">
+            <div class="controls">
+              <span class="help-inline" id="inputError" >Invalid Username</span>
+             </div>
+           </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword" class="control-label col-xs-2">Password</label>
+        <div class="col-xs-10">
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="password" id="inputError">
+            {% if error=="password" %}
+            <div class="controls">
+              <span class="help-inline">Invalid Password</span>
+             </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <div class="checkbox">
+                <label><input type="checkbox"> Remember me</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </div>
+  
+</form>
+{% for message in get_flashed_messages() %}
+      <br>
+      <div class="alert alert-info">
+        <a href="/" class="close" data-dismiss="alert">&times;</a><br>
+        <strong>Note!</strong>{{message}}
+      </div>
+      {% endfor %}
+
+</div>
+<script src="{{ url_for('static', filename="jquery-1.11.1") }}"></script>
+    <script src="{{ url_for('static', filename="bootstrap/js/bootstrap.min.js") }}""></script>
+	</body>
+</html>
